@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Dream Journal</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <style>
+    .span4{
+      text-align:left;
+    }
+    .myfooter{
+      bottom:0;
+      left:200px;
+    }
+  </style>  
+</head>
+<body>
+
+
+<div class="container-fluid"  > 
+  <div class="row" style-"height:100%">
+    <div class= "col-sm-4" style="width:350px;height:100%">
+      <img src="/images/dreamIcon.jpg" class="img-circle" alt="Cinque Terre" width="204" height="136" style="margin-bottom:100px;"> 
+      <p style="margin-bottom:50px;">Not a user?
+      <a href="/signUp">
+      <input type="button" name="signUp" id="signUp" class="btn btn-info" value="SignUp" style="margin-bottom:50px;"></a></p>
+      <ul class="nav nav-pills nav-stacked" role="tablist">
+        <li><a href="/login">Login</a></li>
+        <li class="active"><a href="/add">Add Dream</a></li>        
+        <li>
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Filter Dreams By<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+              <li><a href="/listThings">Things</a></li>
+              <li><a href="/listRecur">Recurring</a></li> 
+              <li><a href="/list">Dream Journal</a></li>
+                                     
+          </ul>
+        </li>        
+        <li><a href="/signOut">SignOut</a></li>        
+      </ul>
+    </div>
+    <div class= "col-sm-8" style="margin:0 auto;height:100%">      
+      <div style="text-align:center; align:center;margin-top:100px;padding-left:400px;">
+      {{{body}}}
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+  
+      
+</div>
+
+
+
+</body>
+</html>
