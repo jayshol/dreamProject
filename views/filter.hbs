@@ -1,10 +1,10 @@
 
 
-<h3>Enter the things for filtering the dreams</h3>
-<form role="form" action="/filterByThings" method="POST">
+<h3>Enter the {{filter}} for filtering the dreams</h3>
+<form role="form" action="/{{action}}" method="POST">
 	<div class="row form-group" style="margin-top:30px;width:300px;text-align:center;align:center;">
-	  <div class="col-md-6"><label for="things">Filter By</label></div>
-	  <div class="col-md-6"><input type="text" name="things" id="things" class="form-control"></div>
+	  <div class="col-md-6"><label for="{{filter}}">Filter By</label></div>
+	  <div class="col-md-6"><input type="text" name="{{filter}}" id="{{filter}}" class="form-control"></div>
 	</div>
 	<div class="row form-group" style="margin-top:30px;width:300px;text-align:center;">
 	  <div class="col-md-12"><input type="submit" class="btn btn-info" value="Get Dreams"></div>

@@ -1,21 +1,25 @@
-<div class="container-fluid">
-      <div class="row-fluid">        
-        <div class="span9">       
-          <div class="row-fluid">
-          {{#each myDreams}}
-            <div class="span4">
-              <h3>{{title}}</h3>
-              <p>{{content}}</p>        
-            </div>    
-           {{/each}}       
-          </div>
+<div class="bs-example">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">My Dream Journal</h3>
         </div>
-      </div>
-
-      <hr>
-
-      <footer class="myfooter">
-        <p>&copy;Dream Company 2015</p>
-      </footer>
-
+        <div class="panel-body">
+          <div class="container-fluid">  
+            <div class="row-fluid">        
+              <div class="span9">       
+                <div class="row-fluid">
+                {{#each myDreams}}
+                  <div class="dreamClass">
+                    <h3>{{title}}</h3>
+                    <p>{{content}}</p>
+                    <a href="/edit/{{_id}}"><image src="/images/edit.png" alt="edit" width="20px" height="22px"></a>
+                    <hr>          
+                  </div>    
+                 {{/each}}       
+                </div>
+              </div>
+            </div>
     </div>
+</div>
+
+

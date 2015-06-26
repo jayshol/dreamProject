@@ -5,20 +5,37 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">  
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>  
+ <link rel="stylesheet" href="main.css">   
 </head>
 <body>
+<div class="container-fluid text-right">
+    <ul id="main-nav" class="list-unstyled list-inline">
+        <li><p>Not a user?</p></li>
+        <li><a href="/signUp"><input type="button" name="signUp" id="signUp" class="btn btn-info" value="Sign Up"></a></li>
+    </ul>
 
-<p>Not a user?</p><input type="button" name="signUp" id="signUp" class="btn btn-info" value="SignUp">
-<div class="container" style="text-align:center;margin-top:50px;">  
-  <img src="/images/dreamIcon.jpg" class="img-circle" alt="Cinque Terre" width="504" height="286"> 
-  <div style="text-align:center; align:center;margin-top:100px;padding-left:400px;">
-  {{{body}}}
-  </div>
+</div>    
+<div class="container" style="text-align:center;margin-top:50px;">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <img src="images/dreamIcon.jpg" class="img-circle" alt="Cinque Terre" width="504" height="286">
+        </div>    
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <div style="text-align:center; align:center;margin-top:100px;padding-left:400px;">
+              {{{body}}}
+            </div>
+        </div>
+    </div>      
 </div>
+<footer class="footer">
+  <div class="container text-center">
+    <p>&copy;Dream Company 2015</p>
+  </div>
+</footer>
 
-
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </body>
 </html>

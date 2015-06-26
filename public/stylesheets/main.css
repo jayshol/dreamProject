@@ -1,0 +1,45 @@
+#main-nav{
+    padding-top:10px;
+}
+.ddClass{
+    max-width: 75%;    
+    
+}
+.dreamClass{
+      background-color: 'blue';
+    }
+
+.footerClass{
+  bottom:50px;
+  left:20px;
+  text-align:center;
+position:absolute;
+background-color: navy;
+}
+hr {
+  color: black;
+}
+.outerClass{
+    padding-top: 15px;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #481CC9;
+  color:cornsilk;
+    padding: 5px;
+}

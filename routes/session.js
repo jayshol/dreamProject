@@ -12,7 +12,7 @@ function Session(){
 	this.isUserLoggedIn = function(req, res, next){
 		var sessionId = req.cookies.session;
 
-		getUserName(sessionId, function(err, username){
+		getUserName(sessionId, function(err, username){			
 			if(!err && username){
 				req.username = username;
 			}
@@ -136,8 +136,8 @@ function Session(){
 						return next(err);
 					}
 				}
-				console.log(user);
-				startSession(user(_id), function(err, sessionId){
+				console.log(user['_id']);				
+				startSession(user['_id'], function(err, sessionId){
 					res.cookie('session', sessionId);
 					// redirect to the welcome page
 					//res.end("Sai is here");

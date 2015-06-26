@@ -14,6 +14,15 @@ function Dreams(){
 
 	};
 
+	this.updateDream = function(queryObj, dreamObj, callBack){
+
+		Dream.update(queryObj, dreamObj, function(err, updateResult){
+			if(err) return callBack(err, null);
+
+			callBack(null, updateResult);
+		});
+	}
+
 	this.findDreamsByUser = function(userObj, callBack){
 
 		Dream.find(userObj, function(err, results){
@@ -58,6 +67,7 @@ function Dreams(){
 	this.findDreamsByQuery = function(queryObj, callBack){
 		Dream.find(queryObj, function(err, results){
 			if(err) return callBack(err, null);
+				console.log(results);
 				callBack(null, results);			
 		});
 	}

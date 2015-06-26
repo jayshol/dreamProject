@@ -23,7 +23,8 @@ function Users(){
 		User.create(userItem, function(err, newUser){
 			if(!err){
 				console.log('User inserted');
-				callBack(null, newUser[0]);
+				console.log(newUser);
+				return callBack(null, newUser);
 			}
 			callBack(err, null);
 		});

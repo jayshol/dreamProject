@@ -29,8 +29,9 @@ function Content(){
 
 	}
 
-	this.handleDreamEntry = function(req, res, next){
-		"use strict";		
+	function createDreamObject(req){
+		"use strict";
+
 		var escaped_content = validator.escape( req.body.content);
 		escaped_content = escaped_content.replace(/\r?\n/g,'<br>');
 		//console.log(req.body.lucid);
@@ -51,7 +52,17 @@ function Content(){
 			pvt: (typeof req.body.private === 'undefined') ? false : req.body.private
 		};
 
-		dreams.addDream(dreamObj, function(err, newDream){
+		return dreamObj;
+
+
+	}
+
+	this.handleDreamEntry = function(req, res, next){
+		"use strict";		
+		
+		var newDreamObj = createDreamObject(req);
+
+		dreams.addDream(newDreamObj, function(err, newDream){
 			if(err) return next(err);
 		// TODO: redirect the page the listing of dreams.
 			res.redirect('/list');
@@ -76,8 +87,113 @@ function Content(){
 		});
 	}
 
+	this.displayListMoods = function(req, res, next){
+		res.render('filter', {
+			filter:'mood',
+			action:'filterByMood',
+			layout:'subMain.hbs'
+		});
+	}
+
+	this.filterDreamsByMood = function(req, res, next){				
+		var queryObj = {
+			mood:req.body.mood
+		};
+
+		getDataFromDatabase(req, queryObj);
+	}
+
+	function getDataFromDatabase(req, queryObj){
+		var username = req.username;
+		if(!username){
+			res.redirect('/login');
+		}
+
+		queryObj.username = username;
+
+		dream.findDreamsByQuery(queryObj, function(err, dreams){
+			if(err) return next(err);
+			res.render('listDreams', {
+				username:username,
+				myDreams:dreams,
+				layout:'subMain.hbs'
+			});
+		});
+
+	}
+
+	this.displayListPlaces = function(req, res, next){
+		res.render('filter',{
+			filter: 'places',
+			action:'filterByPlaces',
+			layout:'subMain.hbs'
+		});
+	}
+
+	this.filterDreamsByPlaces = function(req, res, next){
+		var username = req.username;
+		if(!username){
+			res.redirect('/login');
+		}
+
+		var places = req.body.places;
+		dreams.findDreamsByQuery({username:username, places:places}, function(err, dreams){
+			if(err) return next(err);
+			res.render('listDreams', {
+				username:username,
+				myDreams:dreams,
+				layout:'subMain.hbs'
+			});
+		});
+	}
+
+/*	this.filterDreamsByMood = function(req, res, next){
+		var username = req.username;
+		if(!username){
+			res.redirect('/login');
+		}
+		var mood = req.body.mood;
+		dreams.findDreamsByQuery({username:username, mood:mood}, function(err, dreams){
+			if(err) return next(err);
+			res.render('listDreams', {
+				username:username,
+				myDreams:dreams,
+				layout:'subMain.hbs'
+			});
+		});
+	}  */
+
+	this.displayListPeople = function(req, res, next){
+		res.render('filter', {
+			filter:'people',
+			action:'filterByPeople',
+			layout:'subMain.hbs'
+		});
+	}
+
+	this.filterDreamsByPeople = function(req, res, next){
+		var username = req.username;
+		if(!username){
+			res.redirect('/login');
+		}
+
+		var people = req.body.people;
+		dreams.findDreamsByQuery({username:username, people:people}, function(err, dreams){
+			if(err) return next(err);
+			res.render('listDreams', {
+				username:username,
+				myDreams:dreams,
+				layout:'subMain.hbs'
+			});
+		});
+
+	}
+
 	this.displayDreamsByThings = function(req,res, next){
-		res.render('filter',{layout:'subMain.hbs'});
+		res.render('filter',{
+			filter:'things',
+			action:'filterByThings',
+			layout:'subMain.hbs'});
 	}
 
 	this.filterDreamsByThings = function(req, res, next){
@@ -113,8 +229,91 @@ function Content(){
 		});
 	}
 
+	this.displayLucidDreams = function(req, res, next){
+		var username = req.username;
+		if(!username){
+			res.redirect('/login');			
+		}
+
+		dreams.findDreamsByQuery({username:username, lucid:true}, function(err, dreams){
+			if(err) return next(err);
+			res.render('listDreams', {
+				username:username,
+				myDreams: dreams,
+				layout:'subMain.hbs'
+			});
+		});
+	}
+
+	this.displayNightmares = function(req, res, next){
+		var username = req.username;
+		if(!username){
+			res.redirect('/login');
+		}
+
+		dreams.findDreamsByQuery({username:username, nightmare:true}, function(err, dreams){
+			if(err) return next(err);
+			res.render('listDreams', {
+				username:username,
+				myDreams: dreams,
+				layout:'subMain.hbs'
+			});
+		});
+	}
+
 	this.displayWelcomePage = function(req, res, next){
 		res.render('welcome', {layout:'subMain.hbs'});
+	}
+
+	this.displayEditDream = function(req, res, next){
+		var id = req.params.id;
+		var username = req.username;
+
+		dreams.findDreamsByQuery({username:username, _id:id}, function(err, dream){
+			if(err) return next(err);
+			var dreamObj = makeDataObject(dream[0]);			
+			console.log(dreamObj);
+			
+			res.render('edit', {
+				username:username,
+				dream:dreamObj,
+				layout:'subMain.hbs'
+			});
+
+		});
+	}
+
+	function makeDataObject(data){
+		var dataObj = {};
+
+		for(var i in data._doc){
+			console.log(typeof data._doc[i]);
+			if(Array.isArray(data._doc[i]) && data._doc.hasOwnProperty(i)){
+				dataObj[i] = validator.escape(data._doc[i].join(","));	
+			}else{				
+					dataObj[i] = data._doc[i];
+			}
+			
+			
+		}
+
+		return dataObj;
+	}
+
+	this.handleDreamUpdate = function(req, res, next){
+
+		var dreamID = req.params.id;
+
+		var editedDreamObj = createDreamObject(req);
+		editedDreamObj['_id'] = dreamID;
+
+		dreams.updateDream({_id: dreamID}, editedDreamObj, function(err, updated){
+			if(err) return next(err);
+
+			//redirect to the listing of the dreams
+			res.redirect('/list');
+		});
+
 	}
 }
 
