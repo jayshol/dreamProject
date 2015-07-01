@@ -24,6 +24,8 @@ app.use(cookieParser());
 
 routes(app);
 
-app.listen(9000, function(){
-	console.log('Server listening at port 9000');
-});
+// app.listen(9000, function(){
+// 	console.log('Server listening at port 9000');
+// });
+
+module.exports = app;

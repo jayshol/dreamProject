@@ -53,7 +53,7 @@ function Session(){
 
 		SessionModel.create(session, function(err, result){
 			if(err) callBack(err, null);
-			console.log(result);
+			//console.log(result);
 			callBack(null, sessionId);
 		});
 	}
@@ -69,16 +69,17 @@ function Session(){
 				if(err.invalid_password){
 					res.end('Invalid password');
 				}else if(err.no_such_user){
-					res.end('No usch user exists');
+					res.end('No such user exists');
 				}
-			}
-			console.log(user);
-			startSession(user['_id'], function(err, sessionId){
-				res.cookie('session', sessionId);
-				//redirect to the welcome page
-				//res.end('sai is here');
-				res.redirect("/welcome");
-			});			
+			} else{
+				//console.log(user);
+				startSession(user['_id'], function(err, sessionId){
+					res.cookie('session', sessionId);
+					//redirect to the welcome page
+					//res.end('sai is here');
+					res.redirect("/welcome");
+				});
+			}			
 		});
 	};
 

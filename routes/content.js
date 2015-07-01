@@ -75,16 +75,17 @@ function Content(){
 		var username = req.username;
 		if(!username){
 			return res.redirect('/login');
-		}	
+		}else{	
 		
-		dreams.findDreamsByQuery({username: username}, function(err, dreams){
-			if(err) return next(err);
-			//console.log(dreams);
-			res.render('listDreams', {
-				username: username,
-				myDreams : dreams,				
-			layout:'subMain.hbs'});
-		});
+			dreams.findDreamsByQuery({username: username}, function(err, dreams){
+				if(err) return next(err);
+				//console.log(dreams);
+				res.render('listDreams', {
+					username: username,
+					myDreams : dreams,				
+				layout:'subMain.hbs'});
+			});
+		}
 	}
 
 	this.displayListMoods = function(req, res, next){
@@ -100,10 +101,10 @@ function Content(){
 			mood:req.body.mood
 		};
 
-		getDataFromDatabase(req, queryObj);
+		getDataFromDatabase(req, res, queryObj);
 	}
 
-	function getDataFromDatabase(req, queryObj){
+	function getDataFromDatabase(req, res, queryObj){
 		var username = req.username;
 		if(!username){
 			res.redirect('/login');
@@ -111,7 +112,7 @@ function Content(){
 
 		queryObj.username = username;
 
-		dream.findDreamsByQuery(queryObj, function(err, dreams){
+		dreams.findDreamsByQuery(queryObj, function(err, dreams){
 			if(err) return next(err);
 			res.render('listDreams', {
 				username:username,
@@ -131,21 +132,30 @@ function Content(){
 	}
 
 	this.filterDreamsByPlaces = function(req, res, next){
+		var queryObj = {
+			places: req.body.places
+		}
+
+		getDataFromDatabase(req, res, queryObj);
+	}
+
+/*	this.filterDreamsByPlaces = function(req, res, next){
 		var username = req.username;
 		if(!username){
 			res.redirect('/login');
-		}
+		} else{
 
-		var places = req.body.places;
-		dreams.findDreamsByQuery({username:username, places:places}, function(err, dreams){
-			if(err) return next(err);
-			res.render('listDreams', {
-				username:username,
-				myDreams:dreams,
-				layout:'subMain.hbs'
+			var places = req.body.places;
+			dreams.findDreamsByQuery({username:username, places:places}, function(err, dreams){
+				if(err) return next(err);
+				res.render('listDreams', {
+					username:username,
+					myDreams:dreams,
+					layout:'subMain.hbs'
+				});
 			});
-		});
-	}
+		}
+	} */
 
 /*	this.filterDreamsByMood = function(req, res, next){
 		var username = req.username;
@@ -172,6 +182,14 @@ function Content(){
 	}
 
 	this.filterDreamsByPeople = function(req, res, next){
+		var queryObj = {
+			people:req.body.people
+		}
+
+		getDataFromDatabase(req, res, queryObj);
+	}
+
+/*	this.filterDreamsByPeople = function(req, res, next){
 		var username = req.username;
 		if(!username){
 			res.redirect('/login');
@@ -187,7 +205,7 @@ function Content(){
 			});
 		});
 
-	}
+	} */
 
 	this.displayDreamsByThings = function(req,res, next){
 		res.render('filter',{
@@ -196,6 +214,14 @@ function Content(){
 			layout:'subMain.hbs'});
 	}
 
+	this.filterDreamsByThings = function(req, res, next){
+		var queryObj = {
+			things:req.body.things
+		}
+		getDataFromDatabase(req, res, queryObj);
+	}
+
+	/*
 	this.filterDreamsByThings = function(req, res, next){
 		var username = req.username;
 		if(!username) return res.redirect('/login');
@@ -213,7 +239,16 @@ function Content(){
 		});
 	}
 
+	*/
+
 	this.displayRecurringDreams = function(req, res, next){
+		var queryObj = {
+			recurring:true
+		}
+		getDataFromDatabase(req, res, queryObj);
+	}
+
+/*	this.displayRecurringDreams = function(req, res, next){
 		var username = req.username;
 		if(!username){
 			return res.redirect('/login');
@@ -227,9 +262,17 @@ function Content(){
 				layout:'subMain.hbs'
 			});
 		});
-	}
+	} */
 
 	this.displayLucidDreams = function(req, res, next){
+		var queryObj = {
+			lucid:true
+		}
+
+		getDataFromDatabase(req, res, queryObj);
+	}
+
+/*	this.displayLucidDreams = function(req, res, next){
 		var username = req.username;
 		if(!username){
 			res.redirect('/login');			
@@ -243,9 +286,16 @@ function Content(){
 				layout:'subMain.hbs'
 			});
 		});
-	}
+	} */
 
 	this.displayNightmares = function(req, res, next){
+		var queryObj = {
+			nightmare:true
+		}
+		getDataFromDatabase(req, res, queryObj);
+	}
+
+/*	this.displayNightmares = function(req, res, next){
 		var username = req.username;
 		if(!username){
 			res.redirect('/login');
@@ -259,7 +309,7 @@ function Content(){
 				layout:'subMain.hbs'
 			});
 		});
-	}
+	}  */
 
 	this.displayWelcomePage = function(req, res, next){
 		res.render('welcome', {layout:'subMain.hbs'});

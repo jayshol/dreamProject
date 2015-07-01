@@ -12,18 +12,31 @@ module.exports = exports = function(app){
 
 	app.get('/', contentObj.displayMainPage);
 
-	app.get('/login', sessionObj.displayLoginPage);
-	app.post('/login', sessionObj.handleLogin);	
+	app.route('/login')
+		.get(sessionObj.displayLoginPage)
+		.post(sessionObj.handleLogin);
+
+	// app.get('/login', sessionObj.displayLoginPage);
+	// app.post('/login', sessionObj.handleLogin);	
 	
 	// handling sign up
-	app.get('/signup', sessionObj.displaySignUpPage);
-	app.post('/signup', sessionObj.handleSignUp);
+	app.route('/signup')
+		.get(sessionObj.displaySignUpPage)
+		.post(sessionObj.handleSignUp);
+	// app.get('/signup', sessionObj.displaySignUpPage);
+	// app.post('/signup', sessionObj.handleSignUp);
 
-	app.get('/add', contentObj.displayAddDreamPage);
-	app.post('/add', contentObj.handleDreamEntry);
+	app.route('/add')
+		.get(contentObj.displayAddDreamPage)
+		.post(contentObj.handleDreamEntry);
+	// app.get('/add', contentObj.displayAddDreamPage);
+	// app.post('/add', contentObj.handleDreamEntry);
 
-	app.get('/edit/:id', contentObj.displayEditDream);
-	app.post('/edit/:id', contentObj.handleDreamUpdate);
+	app.route('/edit/:id')
+		.get(contentObj.displayEditDream)
+		.post(contentObj.handleDreamUpdate)
+	// app.get('/edit/:id', contentObj.displayEditDream);
+	// app.post('/edit/:id', contentObj.handleDreamUpdate);
 
 	app.get('/list', contentObj.displayDreamsByUser);
 	app.get('/listThings', contentObj.displayDreamsByThings);
@@ -45,6 +58,5 @@ module.exports = exports = function(app){
 	app.get('/welcome', contentObj.displayWelcomePage);
 
 	app.get('/signOut', sessionObj.handleSignOut);
-
 
 }
