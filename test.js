@@ -1,16 +1,34 @@
-var request = require('supertest');
-var app = require('./app');
+var Session = require('supertest-session')({
+	app:require('./app')
+});
 
-describe('Requests root path', function(){
-	it('requests login page', function(done){
-		request(app)
-			.get('/login')
-			.expect(200, done);
+describe('access restricted sites', function(){
+	
+	before(function(){
+		this.sess = new Session();
 	});
 
-	it('requests login content', function(done){
-		request(app)
-			.get('/login')
-			.expect('Content-Type', /html/, done);
-	})
-})
+	after(function(){
+		this.sess.destroy();
+	});
+
+	it('fail to access', function(done){
+		this.sess.get('/list')
+			.expect(302)
+			.end(done);
+	});
+
+	it('should sign in', function(done){
+		this.sess.post('/login')
+			.send('user=sai&password=sai')
+			.expect(302)
+			.end(done);
+	});
+
+	it('should access restricted site', function(done){
+		this.sess.get('/list')
+			.expect('Content-Type', /html/)
+			.end(done)
+	});
+
+});
