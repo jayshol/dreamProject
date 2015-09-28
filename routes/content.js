@@ -38,7 +38,7 @@ function Content(){
 
 		var dreamObj = {
 			username: req.username,
-			title : req.body.title,
+			title : makeArray(req.body.title)[0],
 			content : escaped_content,
 			date : new Date(req.body.date),
 			recurring : (typeof req.body.recur === 'undefined')? false : req.body.recur,
@@ -70,7 +70,7 @@ function Content(){
 
 	}
 
-	this.displayDreamsByUser = function(req, res, next){
+/*	this.displayDreamsByUser = function(req, res, next){
 
 		var username = req.username;
 		if(!username){
@@ -81,11 +81,16 @@ function Content(){
 				if(err) return next(err);
 				//console.log(dreams);
 				res.render('listDreams', {
-					username: username,
+					usrname: username,
 					myDreams : dreams,				
 				layout:'subMain.hbs'});
 			});
 		}
+	} */
+
+	this.displayDreamsByUser = function(req, res, next){
+		var queryObj = {};
+		getDataFromDatabase(req, res, queryObj);
 	}
 
 	this.displayListMoods = function(req, res, next){
@@ -115,7 +120,7 @@ function Content(){
 		dreams.findDreamsByQuery(queryObj, function(err, dreams){
 			if(err) return next(err);
 			res.render('listDreams', {
-				username:username,
+				usrname:username,
 				myDreams:dreams,
 				layout:'subMain.hbs'
 			});
@@ -315,6 +320,19 @@ function Content(){
 		res.render('welcome', {layout:'subMain.hbs'});
 	}
 
+	this.displayPublicDreams = function(req, res, next){
+		//res.send('public dreams');
+		dreams.findDreamsByQuery({pvt:false}, function(err, dreams){
+			if(err) return next(err);
+
+			res.render('listDreams', {
+				usrname:'public',
+				myDreams: dreams,
+				layout:'subMain.hbs'
+			});
+		});
+	}
+
 	this.displayEditDream = function(req, res, next){
 		var id = req.params.id;
 		var username = req.username;
@@ -331,17 +349,26 @@ function Content(){
 			});
 
 		});
-	}
+	}	
 
 	function makeDataObject(data){
 		var dataObj = {};
 
-		for(var i in data._doc){
-			console.log(typeof data._doc[i]);
+		for(var i in data._doc){			
+			//console.log(typeof data._doc[i]);
 			if(Array.isArray(data._doc[i]) && data._doc.hasOwnProperty(i)){
 				dataObj[i] = validator.escape(data._doc[i].join(","));	
-			}else{				
-					dataObj[i] = data._doc[i];
+			}else{									
+					if(i == "date"){
+						var dateObj = new Date(data._doc[i]);
+						var month = ((dateObj.getMonth() + 1) >= 10) ? (dateObj.getMonth() + 1) : "0" + (dateObj.getMonth() + 1);
+						var date = ((dateObj.getDate() + 1) >= 10) ? (dateObj.getDate() + 1) : "0" + (dateObj.getDate() + 1);
+						var dateString = dateObj.getFullYear() + '-' + month + '-' + date;
+						//console.log(dateString);
+						dataObj[i] = dateString;
+					}else{
+						dataObj[i] = data._doc[i];
+					}
 			}
 			
 			

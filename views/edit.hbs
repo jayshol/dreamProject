@@ -1,41 +1,87 @@
 <h2>Edit Your Dream</h2>
 <form role="form" method="post" action="/edit/{{dream._id}}">
-<div class="row form-group" style="text-align:left;">
-<div><label for="date">Date</label><input type="text" id="date" name="date" value="{{dream.date}}"> </div>
-<div><label for="title">Title</label><input type="text" id="title" name="title" value={{dream.title}}> </div>
-	<div class="col-md-8">
-		<textarea rows=10 cols="50" id="content" name="content" class="form-control">{{dream.content}}</textarea>
-	</div>
-	<div class="col-md-4">
-		<input type="checkbox" name="recur" id="recur" class="form-control" {{#if dream.recurring}}checked{{/if}}> Recurring
-		<input type="checkbox" name="lucid" id="lucid" class="form-control" {{#if dream.lucid}}checked{{/if}}>  Lucid
-		<input type="checkbox" name="Nightmare" id="nightmare" class="form-control" {{#if dream.nightmare}}checked{{/if}} >Nightmare
-	</div>
-</div>
-<div class="row form-group">
-	<div>
-	<label for="mood">Mood</label>
-	<input type="text" id="mood" name="mood" class="form-control" value="{{dream.mood}}">	
-	</div>
-	<div>
-	<label for="people">People</label>
-	<input type="text" id="people" name="people" class="form-control" value="{{dream.people}}">
-	</div>
-	<div>
-	<label for="places">Places</label>
-	<input type="text" id="places" name="places" class="form-control" value="{{dream.places}}">
-	</div>
-	<div>
-		<label for="things">Things</label>
-		<input type="text" id="things" name="things" class="form-control" value="{{dream.things}}">
-		<p>{{dream.things}}</p>
-	</div>
-	<div>
-		<input type="checkbox" name="role" id="role" class="form-control" {{#if dream.role}}checked{{/if}} >Is the dream about you?
-	</div>
-	<div>
-		<input type="checkbox" name="private" id="private" class="form-control"  {{#if dream.pvt}}checked{{/if}} >Private
-	</div>
-</div>
-<input type="submit" class="btn btn-info" value="Edit Dream">
+    <div class="form-group" >
+        <div class="row">
+            <div class="col-md-6">
+                <label for="title">Title</label>                
+            </div>
+            <div class="col-md-3 col-md-offset-3">            
+                <label for="date">Date</label>                 
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">                
+                <input type="text" id="title" name="title" value="{{dream.title}}">
+            </div>
+            <div class="col-md-3 col-md-offset-3">                            
+                <input type="date" id="date" name="date" value="{{dream.date}}"> 
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12"><label for="content">Narrate Your Dream</label></div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <textarea rows=10 cols="50" id="content" name="content" class="form-control">{{dream.content}}</textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <input type="checkbox" name="recur" id="recur" class="form-control" {{#if dream.recurring}}checked{{/if}}>
+                <label for="recur">Recurring</label> 
+            </div>
+            <div class="col-md-4">
+                 <input type="checkbox" name="lucid" id="lucid" class="form-control" {{#if dream.lucid}}checked{{/if}}>
+                <label for="lucid">Lucid</label>
+            </div>
+            <div class="col-md-4">
+                <input type="checkbox" name="Nightmare" id="nightmare" class="form-control" {{#if dream.nightmare}}checked{{/if}} >
+                <label for="nightmare">Nightmare</label>
+            </div>        
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <label for="mood">Mood</label>
+                <input type="text" id="mood" name="mood" class="form-control" value="{{dream.mood}}">
+            </div>        
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <label for="people">People</label>
+                <input type="text" id="people" name="people" class="form-control" value="{{dream.people}}">
+            </div>        
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <label for="places">Places</label>
+                <input type="text" id="places" name="places" class="form-control" value="{{dream.places}}">
+            </div>        
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <label for="things">Things</label>
+                <input type="text" id="things" name="things" class="form-control" value="{{dream.things}}">
+            </div>        
+        </div>
+        <div class="row">
+            <div class="col-md-12">                
+                <input type="checkbox" name="role" id="role" class="form-control" {{#if dream.role}}checked{{/if}} >
+                <label for="role">Is the dream about you?</label>
+            </div>        
+        </div>
+        <div class="row">
+            <div class="col-md-12">                
+                <input type="checkbox" name="private" id="private" class="form-control"  {{#if dream.pvt}}checked{{/if}} >
+                <label for="private">Private</label>
+            </div>        
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+              <input type="submit" class="btn btn-info" value="Edit Dream">
+            </div>
+            <div class="col-md-10">
+              <a href="/cancel" class="btn btn-info">Cancel</a> 
+            </div>
+        </div>
+    </div>    
 </form>

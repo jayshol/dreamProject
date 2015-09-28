@@ -23,25 +23,25 @@ function Dreams(){
 		});
 	}
 
-	this.findDreamsByUser = function(userObj, callBack){
+/*	this.findDreamsByUser = function(userObj, callBack){
 
 		Dream.find(userObj, function(err, results){
 			if(err) return callBack(err, null);
 
 			callBack(null, results);
 		});
-	}
+	}  */
 
-	this.findDreamsByMood = function(queryObj, callBack){
+/*	this.findDreamsByMood = function(queryObj, callBack){
 
 		Dream.find(queryObj, function(err, results){
 			if(err) return callBack(err,null);
 
 			callBack(null, results);
 		});
-	}
+	}  */
 
-	this.findDreamsByPlaces = function(queryObj, callBack){
+/*	this.findDreamsByPlaces = function(queryObj, callBack){
 		Dream.find(queryObj, function(err, results){
 			if(err) return callBack(err, null);
 
@@ -55,7 +55,7 @@ function Dreams(){
 
 			callBack(null, results);
 		});
-	}
+	} */
 
 	this.findDreamsbyDate = function(queryObj, callBack){
 		Dream.find(queryObj, function(err, results){
@@ -67,7 +67,7 @@ function Dreams(){
 	this.findDreamsByQuery = function(queryObj, callBack){
 		Dream.find(queryObj, function(err, results){
 			if(err) return callBack(err, null);
-				console.log(results);
+				//console.log(results);
 				callBack(null, results);			
 		});
 	}

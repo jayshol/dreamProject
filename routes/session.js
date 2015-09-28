@@ -67,9 +67,11 @@ function Session(){
 		users.validateLogin(username, password, function(err, user){
 			if(err){
 				if(err.invalid_password){
-					res.end('Invalid password');
+				//	res.end('Invalid password');
+					res.render("login", {errormsg: "Invalid password"});
 				}else if(err.no_such_user){
-					res.end('No such user exists');
+				//	res.end('No such user exists');
+					res.render("login", {errormsg : "No such user"});
 				}
 			} else{
 				//console.log(user);
@@ -132,7 +134,7 @@ function Session(){
 				if(err){
 					if(err.code === '11000'){
 						errorObj['user_error'] = "User name already in use. Please choose another.";
-						return res.render('signIn', errorObj);
+						return res.render('signUp', {errorObj:errorObj});
 					}else {
 						return next(err);
 					}
@@ -149,7 +151,7 @@ function Session(){
 		} else {
 			console.log('User did not validate.');
 			console.log(errorObj);
-			res.render('signUp', errorObj);
+			res.render('signUp', {errorObj:errorObj});
 		}		
 		//res.end(userName + " is here");
 	};

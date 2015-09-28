@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-  <link rel="stylesheet" href="/stylesheets/main.css">
+  <link rel="stylesheet" href="../stylesheets/main.css">
 </head>
 <body>
 
@@ -15,14 +15,14 @@
   <div class="row" style-"height:100%">
     <div class= "col-md-3">
       <img src="images/dreamIcon.jpg" class="img-circle" alt="Cinque Terre" width="204" height="136" style="margin-bottom:100px;">       
-      <ul class="nav nav-pills nav-stacked text-left ddClass" role="tablist">        
-        <li class="active"><a href="/add">Add Dream</a></li>        
+      <ul class="nav nav-pills nav-stacked text-left ddClass" role="tablist">              
+        <li class="active"><a href="/add">Add Dream</a></li>
+        <li><a href="/list">Dream Journal</a></li>        
         <li>
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Filter Dreams By<span class="caret"></span></a>
           <ul class="dropdown-menu">
               <li><a href="/listThings">Things</a></li>
-              <li><a href="/listRecur">Recurring</a></li> 
-              <li><a href="/list">Dream Journal</a></li>
+              <li><a href="/listRecur">Recurring</a></li>              
               <li><a href="/listNightmare">Nightmares</a></li>
               <li><a href="/listLucid">Lucid Dreams</a></li>
               <li><a href="/listPlaces">Places</a></li>
@@ -35,18 +35,18 @@
     </div>     
     <div class= "col-md-8 col-md-offset-1" >      
       <div>
-      {{{body}}}
+          {{{body}}}
       </div>
     </div>
   </div>
 </div>
     
 
-  <footer class="footer">
-      <div class="container text-center">
-        <p>&copy;Dream Company 2015</p>
-      </div>
-  </footer>
+<footer class="footer">
+  <div class="container text-center">
+    <p>&copy;Dream Company 2015</p>
+  </div>
+</footer>
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

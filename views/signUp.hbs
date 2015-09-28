@@ -1,7 +1,7 @@
 <form role="form" method="POST" action="/signup">
 	<div class="row form-group" style="margin-top:30px;width:300px;text-align:center;">
 	  <div class="col-md-6"><label for="user">User Name</label></div>
-	  <div class="col-md-6"><input type="text" name="user" id="user"></div>
+	  <div class="col-md-6"><input type="text" name="user" id="user"></div>	  
 	</div>
 	<div class="row form-group" style="margin-top:30px;width:300px;text-align:center;">
 	  <div class="col-md-6"><label for="password">Password</label></div>
@@ -19,3 +19,7 @@
 	  <div class="col-md-12"><input type="submit" class="btn btn-info" value="Sign Up"></div>
 	</div>
 </form>
+<div class="col-md-12"><label style="color:red">{{errorObj.username_error}}</label></div>
+<div class="col-md-12"><label style="color:red">{{errorObj.password_error}}</label></div>
+<div class="col-md-12"><label style="color:red">{{errorObj.verify_error}}</label></div>
+<div class="col-md-12"><label style="color:red">{{errorObj.email_error}}</label></div>

@@ -1,7 +1,7 @@
 <div class="bs-example">
     <div class="panel panel-primary">
         <div class="panel-heading">
-            <h3 class="panel-title">My Dream Journal</h3>
+            <h3 class="panel-title">{{usrname}} Dream Journal</h3>
         </div>
         <div class="panel-body">
           <div class="container-fluid">  
@@ -11,8 +11,8 @@
                 {{#each myDreams}}
                   <div class="dreamClass">
                     <h3>{{title}}</h3>
-                    <p>{{content}}</p>
-                    <a href="/edit/{{_id}}"><image src="/images/edit.png" alt="edit" width="20px" height="22px"></a>
+                    <p>{{content}}</p>                                                      
+                      <a href="/edit/{{_id}}"><i class="glyphicon glyphicon-edit" title="edit"></i></a>&nbsp;&nbsp;                     
                     <hr>          
                   </div>    
                  {{/each}}       
@@ -21,5 +21,9 @@
             </div>
     </div>
 </div>
+</div>
+</div>
+
+
 
 

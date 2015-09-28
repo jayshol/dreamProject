@@ -32,15 +32,17 @@ module.exports = exports = function(app){
 	// app.get('/add', contentObj.displayAddDreamPage);
 	// app.post('/add', contentObj.handleDreamEntry);
 
+	app.get('/cancel', contentObj.displayDreamsByUser);
+
 	app.route('/edit/:id')
 		.get(contentObj.displayEditDream)
-		.post(contentObj.handleDreamUpdate)
+		.post(contentObj.handleDreamUpdate);
 	// app.get('/edit/:id', contentObj.displayEditDream);
 	// app.post('/edit/:id', contentObj.handleDreamUpdate);
 
 	app.get('/list', contentObj.displayDreamsByUser);
 	app.get('/listThings', contentObj.displayDreamsByThings);
-	app.post('/filterByThings', contentObj.filterDreamsByThings)
+	app.post('/filterByThings', contentObj.filterDreamsByThings);
 	
 	app.get('/listRecur', contentObj.displayRecurringDreams);
 	app.get('/listLucid', contentObj.displayLucidDreams);
@@ -57,6 +59,7 @@ module.exports = exports = function(app){
 
 	app.get('/welcome', contentObj.displayWelcomePage);
 
+	app.get('/publicDreams', contentObj.displayPublicDreams);
 	app.get('/signOut', sessionObj.handleSignOut);
 
 }
