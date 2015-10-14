@@ -34,7 +34,7 @@ function Content(){
 
 		var escaped_content = validator.escape( req.body.content);
 		escaped_content = escaped_content.replace(/\r?\n/g,'<br>');
-		//console.log(req.body.lucid);
+		console.log(req.body.content);
 
 		var dreamObj = {
 			username: req.username,
@@ -119,11 +119,15 @@ function Content(){
 
 		dreams.findDreamsByQuery(queryObj, function(err, dreams){
 			if(err) return next(err);
-			res.render('listDreams', {
+			var dataObject = {
 				usrname:username,
-				myDreams:dreams,
-				layout:'subMain.hbs'
-			});
+				myDreams:dreams,				
+				layout:'subMain.hbs'			
+			}
+			if(!dreams.length){
+				dataObject.message = "No dreams found.";
+			}
+			res.render('listDreams', dataObject);
 		});
 
 	}
@@ -138,7 +142,7 @@ function Content(){
 
 	this.filterDreamsByPlaces = function(req, res, next){
 		var queryObj = {
-			places: req.body.places
+			places: {'$regex':req.body.places}
 		}
 
 		getDataFromDatabase(req, res, queryObj);
@@ -219,9 +223,9 @@ function Content(){
 			layout:'subMain.hbs'});
 	}
 
-	this.filterDreamsByThings = function(req, res, next){
+	this.filterDreamsByThings = function(req, res, next){		
 		var queryObj = {
-			things:req.body.things
+			things:{'$regex':req.body.things}
 		}
 		getDataFromDatabase(req, res, queryObj);
 	}

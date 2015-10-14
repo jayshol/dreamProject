@@ -1,7 +1,7 @@
 <div class="bs-example">
     <div class="panel panel-primary">
         <div class="panel-heading">
-            <h3 class="panel-title">{{usrname}} Dream Journal</h3>
+            <h3 class="panel-title">{{usrname}}'s Dream Journal</h3>
         </div>
         <div class="panel-body">
           <div class="container-fluid">  
@@ -17,6 +17,10 @@
                   </div>    
                  {{/each}}       
                 </div>
+                <div class="row-fluid">
+                  {{#if message}}<h3>{{message}}</h3>{{/if}}
+                </div>                  
+                </div>                
               </div>
             </div>
     </div>

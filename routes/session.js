@@ -131,9 +131,11 @@ function Session(){
 		var errorObj = {userName:userName, email:email};
 		if(validate(userName, password, email, verify, errorObj)){
 			users.addUser(userName, password, email, function(err, user){
-				if(err){
-					if(err.code === '11000'){
+				if(err){					
+					if(err.code === 11000){
+						console.log(err.code);
 						errorObj['user_error'] = "User name already in use. Please choose another.";
+						console.log(errorObj);
 						return res.render('signUp', {errorObj:errorObj});
 					}else {
 						return next(err);
